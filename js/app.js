@@ -150,12 +150,6 @@ document.getElementById('upload').addEventListener('change', evt => {
             
             let card_sprite_big;
             card_sprite.on('pointerdown', function(e){
-                card_sprite.on('pointermove', move_card);
-            })
-            .on('pointerup', function(e){
-                card_sprite.off('pointermove', move_card);
-            })
-            .on('pointerover', function(e){
                 card_sprite_big = new PIXI.Sprite(card_texture);
                 card_sprite_big.anchor.set(0.5);
             
@@ -166,6 +160,14 @@ document.getElementById('upload').addEventListener('change', evt => {
                 card_sprite_big.y = app.screen.height - card_sprite_big.height / 2;
             
                 app.stage.addChild(card_sprite_big);
+
+                card_sprite.on('pointermove', move_card);
+            })
+            .on('pointerup', function(e){
+                card_sprite.off('pointermove', move_card);
+            })
+            .on('pointerover', function(e){
+                
                 
             }).on('pointerout', function(e){
                 app.stage.removeChild(card_sprite_big);
