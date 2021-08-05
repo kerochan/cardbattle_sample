@@ -182,7 +182,7 @@ document.getElementById('upload').addEventListener('change', evt => {
                         on_tap = true;
                         on_move = false;
                     }
-               }, 2000)
+               }, 2000);
             }).on('touchmove', function(e) {
                 on_move = true;
             }).on('touchend', function(e){
