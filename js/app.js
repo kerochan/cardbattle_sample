@@ -1,3 +1,5 @@
+const { setTimeout } = require("timers/promises");
+
 let app = new PIXI.Application({
     width: 1400,
     height: 800,
@@ -149,6 +151,9 @@ document.getElementById('upload').addEventListener('change', evt => {
             }
             
             let card_sprite_big;
+            let on_tap = true;
+            let on_move = false;
+
             card_sprite.on('pointerdown', function(e){
                 card_sprite_big = new PIXI.Sprite(card_texture);
                 card_sprite_big.anchor.set(0.5);
@@ -168,12 +173,20 @@ document.getElementById('upload').addEventListener('change', evt => {
             })
             .on('pointerover', function(e){
                 
-                
             }).on('pointerout', function(e){
                 app.stage.removeChild(card_sprite_big);
-            }).on('tap', function(e){
-                element = document.getElementById("textbox");
-                element.value = "TAPされました";
+            }).on('touchstart', function(e){
+               setTimeout(function(e){
+                    if(on_tap == true && on_move == false){
+                        document.getElementById("textbox").value = "カード削除";
+                        on_tap = true;
+                        on_move = false;
+                    }
+               }, 2000)
+            }).on('touchmove', function(e) {
+                on_move = true;
+            }).on('touchend', function(e){
+                on_tap = false;
             });
 
         };
