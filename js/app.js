@@ -1,5 +1,3 @@
-const { setTimeout } = require("timers/promises");
-
 let app = new PIXI.Application({
     width: 1400,
     height: 800,
