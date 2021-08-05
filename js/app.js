@@ -171,6 +171,9 @@ document.getElementById('upload').addEventListener('change', evt => {
                 
             }).on('pointerout', function(e){
                 app.stage.removeChild(card_sprite_big);
+            }).on('tap', function(e){
+                element = document.getElementById("textbox");
+                element.value = "TAPされました";
             });
 
         };
