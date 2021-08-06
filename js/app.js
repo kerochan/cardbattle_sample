@@ -142,15 +142,22 @@ document.getElementById('upload').addEventListener('change', evt => {
 
             card_sprite.interactive = true;
 
+            
+            
+            let card_sprite_big;
+
+            on_double_click = false;
+            on_tap = false;
+            on_move = false;
+            start = 0;
+            end = 0;
+
             let move_card = function(e){
+                on_move = true;
                 let position = e.data.getLocalPosition(app.stage);
                 card_sprite.x = position.x;
                 card_sprite.y = position.y;
             }
-            
-            let card_sprite_big;
-            let on_tap = true;
-            let on_move = false;
 
             card_sprite.on('pointerdown', function(e){
                 card_sprite_big = new PIXI.Sprite(card_texture);
@@ -165,26 +172,38 @@ document.getElementById('upload').addEventListener('change', evt => {
                 app.stage.addChild(card_sprite_big);
 
                 card_sprite.on('pointermove', move_card);
+
+                on_tap = true;
+                console.log("ON_TAP");
+                //長押しで画像削除
+                setTimeout(function(){
+                    if(on_tap == true && on_move == false){
+                        document.getElementById("textbox").value = "長押し"
+                        app.stage.removeChild(card_sprite);
+                        on_tap = false;
+                    }else{
+                        on_tap = false;
+                        on_move = false;
+                    }
+                }, 1000);
+
             })
             .on('pointerup', function(e){
                 card_sprite.off('pointermove', move_card);
+                on_tap = false;
+                on_move = false;
+                document.getElementById("textbox").value = ""
             })
             .on('pointerover', function(e){
                 
             }).on('pointerout', function(e){
-                app.stage.removeChild(card_sprite_big);
+                
             }).on('touchstart', function(e){
-               setTimeout(function(e){
-                    if(on_tap == true && on_move == false){
-                        document.getElementById("textbox").value = "カード削除";
-                        on_tap = true;
-                        on_move = false;
-                    }
-               }, 2000);
+               
             }).on('touchmove', function(e) {
-                on_move = true;
+                
             }).on('touchend', function(e){
-                on_tap = false;
+                
             });
 
         };
