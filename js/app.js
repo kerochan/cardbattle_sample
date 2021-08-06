@@ -199,23 +199,11 @@ document.getElementById('upload').addEventListener('change', evt => {
             }).on('pointerout', function(e){
                 
             }).on('touchstart', function(e){
-               //長押しで画像削除
-               setTimeout(function(){
-                if(on_tap == true && on_move == false){
-                    document.getElementById("textbox").value = "長押し"
-                    app.stage.removeChild(card_sprite);
-                    on_tap = false;
-                }else{
-                    on_tap = false;
-                    on_move = false;
-                }
-            }, 1000);
+                
             }).on('touchmove', function(e) {
                 
             }).on('touchend', function(e){
-                on_tap = false;
-                on_move = false;
-                document.getElementById("textbox").value = ""
+                
             });
 
         };
